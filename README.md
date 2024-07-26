@@ -7,3 +7,5 @@ Dataset - https://viswharajhospital-my.sharepoint.com/:f:/g/personal/1032200335_
 The code to control the camera is written in Backend.py and Websocket.py in the backend folder
 
 uvcham.dll is the windows driver file and uvcham.py is the python library for the camera
+
+MiiImageView Application inside the SDK is a standalone software that can be independently used to operate the camera. 
