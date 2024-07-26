@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Prediction</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Image Prediction</h1>
+    <button id="predict-button">Predict</button>
+
+    <h2>Original Image</h2>
+    <img id="original-image" src="path_to_original_image.jpg" alt="Original Image" style="max-width: 500px;">
+
+    <h2>Predicted Image</h2>
+    <img id="predicted-image" src="" alt="Predicted Image" style="max-width: 500px;">
+
+    <h2>Predicted Classes</h2>
+    <ul id="predicted-classes"></ul>
+
+    <script>
+        $(document).ready(function () {
+            $('#predict-button').click(function () {
+                $.ajax({
+                    url: 'http://127.0.0.1:5000/predict',
+                    type: 'GET',
+                    success: function (response) {
+                        // Display predicted image
+                        $('#predicted-image').attr('src', 'data:image/png;base64,' + response.predicted_image);
+
+                        // Display predicted classes
+                        $('#predicted-classes').empty();
+                        $.each(response.classes, function (index, value) {
+                            $('#predicted-classes').append('<li>' + value + '</li>');
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        alert('Error: ' + error);
+                    }
+                });
+            });
+        });
+    </script>
+    
+</body>
+</html>
